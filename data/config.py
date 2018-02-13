@@ -6,7 +6,7 @@
 # MongoDB Configurations
 MongoDB_ADDR = "127.0.0.1"
 MongoDB_USER = "hippo"
-MongoDB_PASS = "hippo1993928"
+MongoDB_PASS = ""
 MongoDB_URL = "mongodb://" + MongoDB_USER + ":" + MongoDB_PASS + "@" + MongoDB_ADDR + "/admin"
 MongoDB_PORT = 27017
 MongoDB_DB = "ECS272-P2-Data"
