@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+<% include ./header.ejs %>
+</head>
+<body class="body" onload="init();">
+<font face="Arial">
+
+    <ul class="nav" class="text-white">
+        <li class="main-title"><bold class="text-white">Yelp Analysis</bold></li>
+        <li id="V1" class="active" onclick="change_color( '#V1' ); open_tab(event, 'view1')"><a>View 1</a></li>
+        <li id="V2" onclick="change_color( '#V2' ); open_tab(event, 'view1')"><a>View 2</a></li>
+    </ul>
+
+    <div id="view1" class="tabcontent">
+        <div id="map"></div>
+    </div>
+
+    <div id="view2" class="tabcontent">
+    </div>
+
+    <br>
+    <!-- footer -->
+</font>
+</body>
+</html>
