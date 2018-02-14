@@ -34,13 +34,12 @@ for id in f:
 	id = str(id).replace( '\n', '' )
 	result = mongodb_db[ Collection ].find( { "business_id": id } )
 	d = "{" + "\"business_id\": \"" + id + "\", \"reviews\": [ "
-	c = 0
 	for r in result:
 		text = str(r[ "text" ]).replace( '\n', ' ' ).replace( '\t', ' ' ).replace( '\r', ' ' )
 		ele = "{" + "\"text\": \"" + text + "\", \"user_id\": \"" + r[ "user_id" ] + "\"}"
 		d += ele
-		if( c != int(len( result )) - 1 ): d += ","
-		c += 1
+		d += ","
+	d = d[:-1]
 	d += "]}"
 	#print( d )
 	fw.write( d )
