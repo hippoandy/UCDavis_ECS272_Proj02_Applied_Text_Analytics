@@ -3,17 +3,44 @@ html, body, #view1, #map {
     width: 100%;
     height: 100%;
 }
-.body {
+#logo-des {
+    position: absolute;
+    z-index: 20000;
+    top: 60px;
+    left: 10px;
+    width: 350px;
+    background-color: rgba( 211, 35, 35, 0.7 );
+    border-radius: 10px;
+    padding: 10px;
+
+    color: white;
+}
+#logo-hr {
+    color: white;
+    background-color: white;
+    border-color: white;
+}
+#map {
+    z-index: 0;
+}
+/* .body {
     background-color: rgba(0, 0, 0, 0.8);
-}
-#view1 {
+} */
+/* #view1 {
     margin-top: 46px;
-}
+} */
 
 /* general usage ------------------------------------------ */
 .title {
     color: #3f3e3e;
     border-bottom: #3f3e3e 0.5px solid;
+}
+.heading {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 5px;
+    text-align: left;
 }
 .text-bold {
     font-weight: bold;
@@ -57,7 +84,6 @@ html, body, #view1, #map {
 highlight {
     color: rgb(173, 69, 38);
 }
-
 h4 {
     font-size: 1.2em;
     /* padding: 5px; */
@@ -74,7 +100,29 @@ large {
     font-weight: bold;
     font-size: 2em;
 }
+small {
+    font-size: 0.9em;
+}
 
+positive, negative, neutral, mixed {
+    font-family: Helvetica; font-weight: bold;
+    font-size: 1.5em;
+}
+positive {
+    color: #045681;
+}
+negative {
+    color: #FF4444;
+}
+neutral {
+    color: #3C7229;
+}
+mixed {
+    color: #0E5144;
+}
+yelp_red {
+    color: #d32323;
+}
 red {
     color: red;
 }
@@ -87,7 +135,125 @@ blue {
 yellow {
     color: yellow;
 }
+
 /* ----------------------------------- self-defined element */
+
+/* start rating ------------------------------------------- */
+.stars-outer {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+    margin: 10px;
+    color: white;
+}
+.stars-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f006";
+    font-size: 1.5em;
+}
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+.stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    color: #f8ce0b;
+    font-size: 1.5em;
+}
+/* ------------------------------------------- start rating */
+
+/* gauge style -------------------------------------------- */
+.liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+/* #gauge-container {
+    padding-top: 40px;
+} */
+#gauge-container > svg {
+    display: inline-block;
+    margin: 10px;
+}
+.thermo-widget {
+    display: inline-block;
+    width: 200px;
+}
+.thermo-widget {
+    display: flex;
+    flex-direction: row;
+    /* margin: 20px; */
+}
+.thermo-widget > .panel {
+    display: inline-block;
+    height: auto;
+    padding: 5px;
+}
+.thermo-widget .percent-summary {
+    display: block;
+    text-align: center;
+}
+.thermo-widget > .panel.right {
+    display: inline-block;
+    height: auto;
+    padding: 5px;
+}
+.thermo-widget .bullet {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+.thermo-widget .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    margin-right: 6px;
+}
+.thermo-widget .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+}
+.thermo-widget .panel .count {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.thermometer {
+    display: inline-block;
+}
+/* -------------------------------------------- gauge style */
+
+/* tooltip style ------------------------------------------ */
+div.tooltip, .tool-tip {
+    color: #333;
+    position: absolute;
+    text-align: center;
+    width: 180px;
+    padding: 10px;
+    font-family: "Arial";
+    font: 20px;
+    background: white;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 20001;
+}
+.tool-tip:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid white;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    margin-left: -12px;
+    z-index: 20001;
+}
+/* ------------------------------------------ tooltip style */
 
 /* tab style ---------------------------------------------- */
 .tab {
@@ -133,6 +299,115 @@ yellow {
 /* ---------------------------------------------- tab style */
 
 /* navbar style ------------------------------------------- */
+.sidenav {
+    height: 84%;
+    width: 500px;
+    position: fixed;
+    z-index: 20000;
+    /* background-color: rgba(0, 0, 0, 0.8); */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+    transition: 0.3s;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    text-align: center;
+    /* border: rgba( 211, 35, 35, 0.7 ) 2px solid; */
+}
+.overlay:before {
+    position: absolute;
+    content:" ";
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display: block;
+    z-index:0;
+    /* background-color: rgba(255,0,0,0.5); */
+    background-color: rgba( 0, 0, 0, 0.5 );
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    /* color: #818181; */
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+.sidenav a:hover {
+    color: #555555;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+#sider-title {
+    position: absolute;
+    top: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#sider-photos {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
+    width: 100%;
+    height: 200px;
+}
+#sider-cate-container {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.category {
+    display: inline-block;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    background: #d32323;
+    border-radius: 5px;
+    margin: 5px;
+}
+#sider-container {
+    /* position: relative; */
+    position: absolute;
+    top: 220px;
+}
+/* #sider-photos > img {
+    
+} */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+#sider-container {
+    width: 480px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#sider-hr {
+    color: white;
+    background-color: white;
+    border-color: white;
+}
+#sider-wc-container {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+}
+/* ------------------------------------------- navbar style */
+
+/* navbar style ------------------------------------------- */
 .nav {
     position: fixed;
     left: 0;
@@ -147,7 +422,8 @@ ul {
     padding: 0;
     overflow: hidden;
     /* background-color: #3f3e3e; */
-    background-color: #d32323;
+    /* background-color: #d32323; */
+    background-color: rgba(0, 0, 0, 0.8);
 }
 li {
     float: left;
@@ -175,7 +451,8 @@ li a:hover:not(.active) {
     /* background-color: #4CAF50; */
     /* background-color: rgb(173, 69, 38); */
     /* background-color: #c9c9c9; */
-    color: #d32323;
+    background-color: #d32323;
+    /* color: #d32323; */
 }
 .button {
     background-color: rgb(173, 69, 38);
@@ -194,6 +471,125 @@ li a:hover:not(.active) {
     background-color: #111;
 }
 /* ------------------------------------------- navbar style */
+
+/* loading ------------------------------------------------ */
+/* Ref. https://codepen.io/MattIn4D/pen/LiKFC */
+.loading {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    visibility: hidden;
+    z-index: 200010;
+}
+/* Transparent Overlay */
+.loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+.loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 1500ms infinite linear;
+    -moz-animation: spinner 1500ms infinite linear;
+    -ms-animation: spinner 1500ms infinite linear;
+    -o-animation: spinner 1500ms infinite linear;
+    animation: spinner 1500ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+/* Animation */
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+/* ------------------------------------------------ loading */
 
 /* the close button --------------------------------------- */
 .close {
