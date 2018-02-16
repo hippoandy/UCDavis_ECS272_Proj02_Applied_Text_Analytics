@@ -8,6 +8,9 @@ app.set( 'view engine', 'ejs' )
 // allow to load external resources
 app.use(express.static('public'));
 
+// set node_module route
+app.use('/lib', express.static(__dirname + '/node_modules/'));
+
 var config = require( './config' );
 
 // MongoDB Client
@@ -40,16 +43,33 @@ app.post( '/mongo/query', function( req, res )
 {
 	var collection = req.body.collection;
 	var condition = req.body.conidtion;
-	console.log( condition )
+	var index = req.body.index;
+	console.log( condition );
+	console.log( index );
 	if( condition == undefined )
-		condition = {}
-	mdbo.collection( collection ).find( condition ).toArray( function( err, result )
+		condition = {};
+	if( index == undefined )
+		index = {};
+	mdbo.collection( collection ).find( condition, index ).toArray( function( err, result )
 	{
 		if (err) throw err;
 		res.send( result );
 	});
 });
-
+app.post( '/mongo/quone', function( req, res )
+{
+    var collection = req.body.collection;
+    var condition = req.body.conidtion;
+	console.log( collection );
+    console.log( condition );
+    if( condition == undefined )
+        condition = {};
+	mdbo.collection( collection ).findOne( condition, function( err, result )
+    {
+        if (err) throw err;
+        res.send( result );
+    });
+});
 app.post( '/mysql/query', function( req, res )
 {
 	var command = req.body.command;
