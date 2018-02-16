@@ -36,6 +36,7 @@ for id in f:
 	d = "{" + "\"business_id\": \"" + id + "\", \"reviews\": [ "
 	for r in result:
 		text = str(r[ "text" ]).replace( '\n', ' ' ).replace( '\t', ' ' ).replace( '\r', ' ' )
+		text = text.replace( "\'", '' ).replace( '\"', '' )
 		ele = "{" + "\"text\": \"" + text + "\", \"user_id\": \"" + r[ "user_id" ] + "\"}"
 		d += ele
 		d += ","
