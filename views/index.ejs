@@ -2,24 +2,84 @@
 <head>
 <% include ./header.ejs %>
 </head>
-<body class="body" onload="init();">
-<font face="Arial">
+<body class="body">
+<font face="Helvetica">
 
-    <ul class="nav" class="text-white">
+    <!-- <ul class="nav" class="text-white">
         <li class="main-title"><bold class="text-white">Yelp Analysis</bold></li>
         <li id="V1" class="active" onclick="change_color( '#V1' ); open_tab(event, 'view1')"><a>View 1</a></li>
-        <li id="V2" onclick="change_color( '#V2' ); open_tab(event, 'view1')"><a>View 2</a></li>
-    </ul>
+        <li id="V2" onclick="change_color( '#V2' ); open_tab(event, 'view1');"><a>View 2</a></li>
+    </ul> -->
+
+    <div id="loading" class="loading">Loading&#8230;</div>
+
+    <div id="logo-des" align="justify">
+        <font face="Verdana">
+        <table width="100%">
+            <tr>
+                <td><img src="/img/yelp_logo.png" alt="Yelp Logo" width="150px";></td>
+                <td aligh="center"><h3><bold class="text-white">Data Analysis</bold></h3></td>
+            </tr>
+        </table>
+        <hr noshade id="logo-hr">
+        This is the Yelp data analysis platform.<br>
+        Please <bold>click the Marker</bold> on the map to see detail information, or<br>
+        <bold>move or zoom the map</bold> to find different stores or restaurants.
+        </font>
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <div id="sider-photos" style="border-bottom: rgba( 211, 35, 35, 0.8 ) 2px solid;" class="overlay">
+            <!-- <img src=""> -->
+        </div>
+        <a href="javascript:void(0)" class="closebtn" onclick="close_sider()">&times;</a>
+        <div id="sider-title" width="100%">
+            <table width="100%">
+                <tr style="height: 0;">
+                    <td><div class="text-white" style="font-size: 40px;"><i class="fa fa-briefcase" aria-hidden="true"></i></div></td>
+                    <td width="50%" align="left"><div id="sider-name" width="100%" class="text-white"></div></td>
+                    <td  align="right">
+                        <div class="stars-outer">
+                            <div id="stars-show" class="stars-inner"></div>
+                        </div>
+                </td></tr>
+            </table>
+        <!-- <div id="sider-addr" width="100%" class="text-white" style="text-align: left;"></div> -->
+        </div>
+        <div id="sider-container">
+            <!-- <hr id="sider-hr" noshade> -->
+            <div id="sider-cate-container"></div>
+            <div id="gauge-container">
+                <table width="100%">
+                    <tr><td align="center" width="50%"><svg id="fillgauge1" width="180" height="180"></svg></td>
+                        <td align="center" width="50%"><svg id="fillgauge2" width="180" height="180"></svg></td>
+                    </tr>
+                    <tr><td align="center"><positive>Positive</positive></td>
+                        <td align="center"><negative>Negative</negative></td>
+                    </tr>
+                    <tr><td align="center" width="50%"><svg id="fillgauge3" width="180" height="180"></svg></td>
+                        <td align="center" width="50%"><svg id="fillgauge4" width="180" height="180"></svg></td>
+                    </tr>
+                    <tr><td align="center"><neutral>Neutral</neutral></td>
+                        <td align="center"><mixed>Mixed</mixed></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="heading" width="100%">Text Cluster from Reviews</div>
+            <div id="sider-wc-container"></div>
+        </div>
+    </div>
 
     <div id="view1" class="tabcontent">
         <div id="map"></div>
     </div>
 
-    <div id="view2" class="tabcontent">
-    </div>
+    <!-- <div id="view2" class="tabcontent">
+    </div> -->
 
-    <br>
+    <!-- <br> -->
     <!-- footer -->
 </font>
+<% include ./gmap.ejs %>
 </body>
 </html>
