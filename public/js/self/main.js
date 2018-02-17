@@ -1,8 +1,3 @@
-var center_lat = 37.7749;
-var center_lon = -122.4194;
-var sidebar_loc = "-550px";
-var ud_offset = 50;
-
 $( document ).ready(function()
 {
     // show the first tab
@@ -11,14 +6,6 @@ $( document ).ready(function()
     close_sider();
     // hide the user review dashboard
     close_u_dash();
-
-    // mdb_query( "business", {}, { "business_id": 1 } ).then( function( data )
-    // {   // Run this when your request was successful
-    //     console.log( data )
-    // }).catch( function( err )
-    // {   // Run this when promise was rejected via reject()
-    //     console.log( err )
-    // });
 });
 
 // MongoDB Query Request --------------------------------------------------------
@@ -162,8 +149,6 @@ function init()
                         success: function( data )
                         {
                             var arr = data[ 0 ].reviews;
-                            var nega = 0, neut = 0, pos = 0, mixed = 0, total = 0 , sentiment = 0;
-
                             // for the graph
                             var user_cluster = {
                                 "nodes": [
@@ -176,9 +161,8 @@ function init()
                                     {"source": "Positive", "target": store_name, "value": 1},
                                     {"source": "Negative", "target": store_name, "value": 1},
                                     {"source": "Neutral", "target": store_name, "value": 1},
-                                ]
-                            };
-
+                            ]};
+                            var nega = 0, neut = 0, pos = 0, mixed = 0, total = 0 , sentiment = 0;
                             for( var i = 0 ; i < arr.length ; i++ )
                             {
                                 var toparse = String(arr[ i ].text).replace( '\n', '' );
@@ -357,8 +341,9 @@ function del_markers()
 async function open_u_dash()
 {
     var e = document.getElementById( "dashboard-u-reviews" );
-    e.style.top = "10px";
-    e.style.left = String(($(window).width() / 2) - ($('#dashboard-u-reviews').width() / 2)) + "px";
+    // e.style.top = "10px";
+    // e.style.left = String(($(window).width() / 2) - ($('#dashboard-u-reviews').width() / 2)) + "px";
+    e.style.top = "0px";
     e.style.visibility = "visible";
 }
 function close_u_dash()
@@ -366,6 +351,7 @@ function close_u_dash()
     var e = document.getElementById( "dashboard-u-reviews" );
     e.style.top = "-" + String($('#dashboard-u-reviews').height() + ud_offset) + "px";
     e.style.visibility = "hidden";
+    document.getElementById( "ud-ana-result" ).style.visibility = "hidden";
 }
 // ---------------------------------------------- User Review Dashboard Functions
 
@@ -405,7 +391,7 @@ function open_tab(evt, tab_name)
 function auto_scroll( id )
 {
     // auto-scroll
-    $('html, body').animate(
+    $('#dashboard-u-reviews').animate(
     {
         scrollTop: $(id).offset().top
     },
