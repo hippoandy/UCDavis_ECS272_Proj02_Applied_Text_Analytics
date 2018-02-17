@@ -1,0 +1,62 @@
+<div id="mySidenav" class="sidenav">
+    <div id="sider-photos" style="border-bottom: rgba( 211, 35, 35, 0.8 ) 2px solid;" class="overlay"></div>
+    <a href="javascript:void(0)" class="closebtn" onclick="close_sider()">&times;</a>
+    <div id="sider-title" width="100%">
+        <table width="100%">
+            <tr style="height: 0;">
+                <td><div class="text-white" style="font-size: 40px;"><i class="fa fa-briefcase" aria-hidden="true"></i></div></td>
+                <td width="50%" align="left"><div id="sider-name" width="100%" class="text-white"></div></td>
+                <td  align="right">
+                    <div class="stars-outer">
+                        <div id="stars-show" class="stars-inner"></div>
+                    </div>
+            </td></tr>
+        </table>
+    <!-- <div id="sider-addr" width="100%" class="text-white" style="text-align: left;"></div> -->
+    </div>
+    <div id="sider-container">
+        <div id="sider-cate-container"></div>
+        <div class="heading" width="100%">Sentiment Analysis - Reviews</div>
+        <div id="gauge-container">
+            <table width="100%">
+                <tr><td align="center" width="50%"><svg id="fillgauge1" width="180" height="180"></svg></td>
+                    <td align="center" width="50%"><svg id="fillgauge2" width="180" height="180"></svg></td>
+                </tr>
+                <tr><td align="center"><positive>Positive</positive></td>
+                    <td align="center"><negative>Negative</negative></td>
+                </tr>
+                <tr><td align="center" width="50%"><svg id="fillgauge3" width="180" height="180"></svg></td>
+                    <td align="center" width="50%"><svg id="fillgauge4" width="180" height="180"></svg></td>
+                </tr>
+                <tr><td align="center"><neutral>Neutral</neutral></td>
+                    <td align="center"><mixed>Mixed</mixed></td>
+                </tr>
+            </table>
+        </div>
+        <div class="heading" width="100%">Text Cluster from Reviews</div>
+        <div id="sider-wc-container"></div>
+        <div class="heading" width="100%" style="margin-top: 10px;">User Review Clusters</div>
+        <div id="sider-graph-container">
+            <div id="fd-graph-legend">
+                <ul class="legend">
+                    <li><span class="store"></span> Store</li>
+                    <li><span class="user"></span> User</li>
+                </ul>
+                <ul class="legend">
+                    <li><span class="positive"></span> Positive</li>
+                    <li><span class="negative"></span> Negative</li>
+                    <li><span class="neutral"></span> Neutral</li>
+                </ul>
+                <div id="fd-graph-des">
+                    The thickness of the line is determined by the value of the <bold>Average Sentiment Score</bold> of a user's review.
+                    <br><br>
+                    If there is no lines between a node and it's group, that means the Average Sentiment Score is <italic><bold>0</bold></italic>.
+                    <br><br>
+                    <remind><italic><bold>Click on the User Nodes</bold> to do further analysis.</italic></remind>
+                    <hr id="sider-hr" noshade>
+                </div>
+            </div>
+            <svg id="fd-graph" width="460" height="500"></svg>
+        </div>
+    </div>
+</div>
