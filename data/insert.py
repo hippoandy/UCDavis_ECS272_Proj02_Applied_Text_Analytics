@@ -25,6 +25,7 @@ mongodb_db = mongodb_client[ MongoDB_DB ]
 
 # read the files
 for item in File_SET:
+	print( item )
 	f = open( "./files/" + item + ".json", 'r' )
 	for r in f:
 		try:
