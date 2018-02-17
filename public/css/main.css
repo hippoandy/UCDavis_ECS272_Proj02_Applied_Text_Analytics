@@ -23,12 +23,6 @@ html, body, #view1, #map {
 #map {
     z-index: 0;
 }
-/* .body {
-    background-color: rgba(0, 0, 0, 0.8);
-} */
-/* #view1 {
-    margin-top: 46px;
-} */
 
 /* general usage ------------------------------------------ */
 .title {
@@ -109,18 +103,21 @@ positive, negative, neutral, mixed {
     font-size: 1.5em;
 }
 positive {
-    color: #045681;
+    color: #178BCA;
 }
 negative {
-    color: #FF4444;
+    color: #FF7777;
 }
 neutral {
-    color: #3C7229;
+    color: #3CA55C;
 }
 mixed {
     color: #0E5144;
 }
-yelp_red {
+remind {
+    color: #f8ce0b;
+}
+yelpred {
     color: #d32323;
 }
 red {
@@ -135,7 +132,6 @@ blue {
 yellow {
     color: yellow;
 }
-
 /* ----------------------------------- self-defined element */
 
 /* start rating ------------------------------------------- */
@@ -226,10 +222,10 @@ yellow {
 
 /* tooltip style ------------------------------------------ */
 div.tooltip, .tool-tip {
-    color: #333;
+    color: rgba(211, 35, 35, 0.8);
     position: absolute;
     text-align: center;
-    width: 180px;
+    width: 150px;
     padding: 10px;
     font-family: "Arial";
     font: 20px;
@@ -298,7 +294,106 @@ div.tooltip, .tool-tip {
 }
 /* ---------------------------------------------- tab style */
 
-/* navbar style ------------------------------------------- */
+/* user reviews dashboard style --------------------------- */
+#dashboard-u-reviews {
+    position: absolute;
+    top: 10px;
+    width: 80%;
+    height: 83%;
+    z-index: 200011;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 20px;
+    transition: 0.3s;
+    padding: 20px;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin-left: auto;
+    margin-right: auto;
+    visibility: hidden;
+}
+/* The ud-r-selector */
+.ud-r-selector {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Hide the browser's default radio button */
+.ud-r-selector input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+/* On mouse-over, add a grey background color */
+.ud-r-selector:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+/* When the radio button is checked, add a blue background */
+.ud-r-selector input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the indicator (dot/circle) when checked */
+.ud-r-selector input:checked ~ .checkmark:after {
+    display: block;
+}
+/* Style the indicator (dot/circle) */
+.ud-r-selector .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+#selector-hr {
+    color: white;
+    background-color: white;
+    border-color: white;
+    margin-top: 20px;
+}
+#selector-e-msg {
+    width: 90%;
+    float: left;
+    text-align: left;
+    color: #d32323;
+    font-weight: bold;
+}
+.selector-btn {
+    float: right;
+}
+#ud-ana-result {
+    width: 95%;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 100px;
+}
+/* --------------------------- user reviews dashboard style */
+
+/* side bar style ----------------------------------------- */
 .sidenav {
     height: 84%;
     width: 500px;
@@ -316,6 +411,7 @@ div.tooltip, .tool-tip {
     margin-right: 10px;
     text-align: center;
     /* border: rgba( 211, 35, 35, 0.7 ) 2px solid; */
+    visibility: hidden;
 }
 .overlay:before {
     position: absolute;
@@ -329,7 +425,7 @@ div.tooltip, .tool-tip {
     /* background-color: rgba(255,0,0,0.5); */
     background-color: rgba( 0, 0, 0, 0.5 );
 }
-.sidenav a {
+.sidenav a, #dashboard-u-reviews a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -338,10 +434,10 @@ div.tooltip, .tool-tip {
     display: block;
     transition: 0.3s;
 }
-.sidenav a:hover {
+.sidenav a:hover, #dashboard-u-reviews a:hover {
     color: #555555;
 }
-.sidenav .closebtn {
+.sidenav .closebtn, #dashboard-u-reviews a {
     position: absolute;
     top: 0;
     right: 25px;
@@ -401,11 +497,57 @@ div.tooltip, .tool-tip {
     background-color: white;
     border-color: white;
 }
-#sider-wc-container {
+#sider-wc-container, #sider-graph-container {
     background: rgba(0, 0, 0, 0.8);
     border-radius: 15px;
 }
-/* ------------------------------------------- navbar style */
+#fd-graph-legend {
+    padding-top: 20px;
+}
+/* basic positioning */
+.legend {
+    list-style: none;
+    background: none;
+    padding-left: 10px;
+}
+.legend li {
+    float: left;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+    color: white;
+}
+.legend span {
+    border: 2px solid white;
+    border-radius: 50%;
+    float: left;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+/* your colors */
+.legend .store { background-color: white; }
+.legend .positive { background-color: #3f3e3e; }
+.legend .positive { background-color: #178BCA; }
+.legend .negative { background-color: #FF4444; }
+.legend .neutral { background-color: #3CA55C; }
+#fd-graph-des {
+    color: white;
+    text-align: left;
+    padding: 10px;
+}
+.links line
+{
+    stroke: white;
+    stroke-opacity: 0.6;
+}
+.nodes circle
+{
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+/* ----------------------------------------- side bar style */
 
 /* navbar style ------------------------------------------- */
 .nav {
@@ -455,16 +597,18 @@ li a:hover:not(.active) {
     /* color: #d32323; */
 }
 .button {
-    background-color: rgb(173, 69, 38);
+    background-color: rgba(211, 35, 35, 0.8);
     border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 10px;
 }
 .button:hover {
     transition: 0.5s;
