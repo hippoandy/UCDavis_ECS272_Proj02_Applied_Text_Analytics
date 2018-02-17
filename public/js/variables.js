@@ -1,8 +1,16 @@
 // global variables
-var center_lat = 37.7749;
-var center_lon = -122.4194;
+// UI component control
 var sidebar_loc = "-550px";
 var ud_offset = 50;
+
+var map_center = {
+    // ** San Francisco **
+    // "lat": 37.7749,
+    // "lon": -122.4194
+    // ** Los Angeles **
+    "lat": 34.0522,
+    "lon": -118.2437
+};
 
 // NLP variables
 // for Compromise lib.
