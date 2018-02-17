@@ -153,7 +153,7 @@ function parse_btn()
     // clear the error message
     document.getElementById( "selector-e-msg" ).innerHTML = "";
     var is_checked = false;
-    var ele;
+    var ele = undefined;
     $('input[name="radio"]').each( function()
     {
         if( $(this).attr( 'checked' ) == "checked" )
@@ -168,9 +168,42 @@ function parse_btn()
             document.getElementById( "selector-e-msg" ).innerHTML = "[<italic>Error</italic>]Please select a sentence!";
         else
         {
+            // show the analytic result panel
+            document.getElementById( "ud-ana-result" ).style.visibility = "visible";
+            // clear the old data
+            document.getElementById( "ud-tag-container" ).innerHTML = "";
+            document.getElementById( "ud-token-container" ).innerHTML = "";
+            // scroll down to see the result (function located in 'main.js')
+            auto_scroll( '#ud-ana-result' );
             var toparse = String($(ele).prev().html());
             var c_r = compendium.analyse( toparse );
             console.log( c_r );
+            var tag;
+            var label = c_r[ 0 ].profile.label;
+            switch( label )
+            {
+                case "positive":
+                    tag = "<div class='category bgcolor-pos'>" + label + "</div>";
+                    break;
+                case "negative":
+                    tag = "<div class='category bgcolor-neg'>" + label + "</div>";
+                    break;
+                case "mixed":
+                    tag = "<div class='category bgcolor-neu'>" + label + "</div>";
+                    break;
+                default:
+                    tag = "<div class='category bgcolor-mix'>" + label + "</div>";
+                    break;
+            }
+            // add the tag
+            document.getElementById( "ud-tag-container" ).innerHTML += tag;
+            var tokens = c_r[ 0 ].tokens;
+            for( var i = 0 ; i < tokens.length ; i++ )
+                document.getElementById( "ud-token-container" ).innerHTML += "<div class='token'> \
+                    <div class='token-text'>" + tokens[ i ].raw + "</div> \
+                    <hr style='border-top: black 1px dotted;'/> \
+                    <div class='token-tag'>" + tokens[ i ].pos + "</div> \
+                </div>";
         }
     });
 }
