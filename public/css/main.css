@@ -1,18 +1,9 @@
-@font-face {
-    font-family: Dosis;
-    src: url(/fonts/Dosis-Regular.ttf);
-}
-@font-face {
-    font-family: FjallaOne;
-    src: url(/fonts/FjallaOne-Regular.ttf);
-}
-html, body, #view1, #map {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+#map {
+    z-index: 0;
 }
 
-#logo-des {
+/* title style -------------------------------------------- */
+#title-container {
     position: absolute;
     z-index: 20000;
     top: 60px;
@@ -20,143 +11,23 @@ html, body, #view1, #map {
     width: 350px;
     background-color: rgba( 211, 35, 35, 0.7 );
     border-radius: 10px;
-    padding: 10px;
+    /* padding: 10px; */
 
     color: white;
 }
-#logo-hr {
+#title-hr {
     color: white;
     background-color: white;
     border-color: white;
 }
-#map {
-    z-index: 0;
-}
-
-/* general usage ------------------------------------------ */
-.title {
-    color: #3f3e3e;
-    border-bottom: #3f3e3e 0.5px solid;
-}
-.heading {
+#title-text {
+    padding: 10px;
+    border-top: white 2px solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     font-size: 1.3em;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    padding: 5px;
-    text-align: left;
 }
-.text-bold {
-    font-weight: bold;
-}
-.text-gray {
-    color: #3f3e3e;
-}
-.text-white {
-    color: #fff;
-}
-.text-black {
-    color: #000;
-}
-.text-medium {
-    font-size: 1.2em;
-}
-.center {
-    text-align: center;
-}
-.float-left {
-    float: left;
-}
-.padding-2p {
-    padding: 2%;
-}
-.padding-5p {
-    padding: 5%;
-}
-.margin-b-10p {
-    margin-bottom: 10px;
-}
-.margin-20p {
-    margin: 20px;
-}
-.bgcolor-grass {
-    background-color: rgba(0, 152, 57, 0.9);
-}
-.bgcolor-grass-dark {
-    background-color: rgba(0, 102, 38, 0.9);
-}
-.bgcolor-pos {
-    background-color: #178BCA !important;
-}
-.bgcolor-neg {
-    background-color: #FF7777 !important;
-}
-.bgcolor-neu {
-    background-color: #3CA55C !important;
-}
-.bgcolor-mix {
-    background-color: #A24BC3 !important;
-}
-/* ------------------------------------------ general usage */
-
-/* self-defined element ----------------------------------- */
-highlight {
-    color: rgb(173, 69, 38);
-}
-h4 {
-    font-size: 1.2em;
-    /* padding: 5px; */
-    color: white;
-}
-bold {
-    font-weight: bold;
-    font-size: 1.1em;
-}
-italic {
-    font-style: italic;
-}
-large {
-    font-weight: bold;
-    font-size: 2em;
-}
-small {
-    font-size: 0.9em;
-}
-remind {
-    color: #f8ce0b;
-}
-yelpred {
-    color: #d32323;
-}
-red {
-    color: red;
-}
-green {
-    color: green;
-}
-blue {
-    color: blue;
-}
-yellow {
-    color: yellow;
-}
-
-positive, negative, neutral, mixed {
-    font-family: Helvetica; font-weight: bold;
-    font-size: 1.5em;
-}
-positive {
-    color: #178BCA;
-}
-negative {
-    color: #FF7777;
-}
-neutral {
-    color: #3CA55C;
-}
-mixed {
-    color: #A24BC3;
-}
-/* ----------------------------------- self-defined element */
+/* -------------------------------------------- title style */
 
 /* start rating ------------------------------------------- */
 .stars-outer {
@@ -187,15 +58,15 @@ mixed {
 
 /* gauge style -------------------------------------------- */
 .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
-/* #gauge-container {
-    padding-top: 40px;
-} */
-#gauge-container > svg {
+#th-container {
+    text-align: center;
+}
+#th-container > svg {
     display: inline-block;
     margin: 10px;
 }
 .thermo-widget {
-    display: inline-block;
+    display: inline-block !important;
     width: 200px;
 }
 .thermo-widget {
@@ -338,6 +209,11 @@ div.tooltip, .tool-tip {
     margin-right: auto;
     visibility: hidden;
 }
+#ud-uid {
+    background-color: blue;
+    border-bottom: white 2px solid;
+    padding: 20px;
+}
 /* The ud-r-selector */
 .ud-r-selector {
     display: block;
@@ -417,11 +293,13 @@ div.tooltip, .tool-tip {
     border-radius: 20px;
     padding: 20px;
     margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
     visibility: hidden;
 }
 #ud-tag-container, #ud-token-container {
-    width: 100%;
-    padding: 10px;
+    width: 98%;
+    padding-top: 10px;
 }
 #ud-token-container {
     border-top: black 1px dashed;
@@ -448,6 +326,15 @@ div.tooltip, .tool-tip {
 }
 .token-tag {
     font-family: FjallaOne;
+}
+.sentiment-score {
+    padding: 10px;
+    color: black;
+    border: black 2px solid;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    display: inline-block;
 }
 /* --------------------------- user reviews dashboard style */
 
@@ -584,7 +471,7 @@ div.tooltip, .tool-tip {
     height: 15px;
     margin-right: 5px;
 }
-/* your colors */
+/* legend colors */
 .legend .store { background-color: white; }
 .legend .positive { background-color: #3f3e3e; }
 .legend .positive { background-color: #178BCA; }
@@ -606,73 +493,6 @@ div.tooltip, .tool-tip {
     stroke-width: 1.5px;
 }
 /* ----------------------------------------- side bar style */
-
-/* navbar style ------------------------------------------- */
-.nav {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-
-    z-index: 20;
-}
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    /* background-color: #3f3e3e; */
-    /* background-color: #d32323; */
-    background-color: rgba(0, 0, 0, 0.8);
-}
-li {
-    float: left;
-}
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-li a:hover:not(.active) {
-    transition: 0.5s;
-    background-color: white;
-    color: #d32323;
-}
-.main-title {
-    display: block;
-    /* color: white; */
-    text-align: center;
-    padding: 12px 14px;
-    text-decoration: none;
-}
-.active {
-    /* background-color: #4CAF50; */
-    /* background-color: rgb(173, 69, 38); */
-    /* background-color: #c9c9c9; */
-    background-color: #d32323;
-    /* color: #d32323; */
-}
-.button {
-    background-color: rgba(211, 35, 35, 0.8);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 10px;
-}
-.button:hover {
-    transition: 0.5s;
-    background-color: #111;
-}
-/* ------------------------------------------- navbar style */
 
 /* loading ------------------------------------------------ */
 /* Ref. https://codepen.io/MattIn4D/pen/LiKFC */
@@ -793,25 +613,75 @@ li a:hover:not(.active) {
 }
 /* ------------------------------------------------ loading */
 
-/* the close button --------------------------------------- */
-.close {
-    float: right;
-}
-.close:hover {
-    transition: 0.5s;
-    transform: scale( 1.5 );
-}
-/* --------------------------------------- the close button */
 
-/* footer style ------------------------------------------- */
-#footer {
+
+
+
+/* ################################ [Deprecated] ################################ */
+
+/* navbar style ------------------------------------------- */
+.nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+
+    z-index: 20;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* background-color: #3f3e3e; */
+    /* background-color: #d32323; */
+    background-color: rgba(0, 0, 0, 0.8);
+}
+li {
+    float: left;
+}
+li a {
+    display: block;
+    color: white;
     text-align: center;
-    /* border: red 2px solid; */
+    padding: 14px 16px;
+    text-decoration: none;
 }
-/* ------------------------------------------- footer style */
-
-
-/* testing */
-td {
-    /* border: red 2px solid; */
+li a:hover:not(.active) {
+    transition: 0.5s;
+    background-color: white;
+    color: #d32323;
 }
+.main-title {
+    display: block;
+    /* color: white; */
+    text-align: center;
+    padding: 12px 14px;
+    text-decoration: none;
+}
+.active {
+    /* background-color: #4CAF50; */
+    /* background-color: rgb(173, 69, 38); */
+    /* background-color: #c9c9c9; */
+    background-color: #d32323;
+    /* color: #d32323; */
+}
+/* .button {
+    background-color: rgba(211, 35, 35, 0.8);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.button:hover {
+    transition: 0.5s;
+    background-color: #111;
+} */
+/* ------------------------------------------- navbar style */
