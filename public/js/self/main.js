@@ -48,7 +48,7 @@ function sql_query( command )
 var markers = [];
 function init()
 {
-    var poistion = {lat: center_lat, lng: -122.4194};
+    var poistion = { lat: map_center.lat, lng: map_center.lon };
     var map = new google.maps.Map(document.getElementById( 'map' ), {
         zoom: 10,
         center: poistion
