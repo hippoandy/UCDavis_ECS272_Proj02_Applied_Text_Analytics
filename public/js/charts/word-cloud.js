@@ -41,13 +41,7 @@ var word_cloud = {
             .attr('class','wordcloud')
             .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
 
-        // Define 'div' for tooltips
-        var div = d3.select( "body" )
-            // declare the tooltip div 
-            .append( "div" )
-            .attr( "class", "tooltip" )
-            .style( "opacity", 0 );
-
+        var div = d3.select( "#tooltip" );
         function draw_wc( words )
         {
             wordcloud.selectAll( "text" )
@@ -73,8 +67,8 @@ var word_cloud = {
                         .style( "opacity", 0.9 )
                         .style( "transition", "0.5s" );
                     div.html(
-                            "<div class=\"text-bold center\">" + d.word + "</div><br>" +
-                            "Amount: " + d.amount
+                            "<div class=\"text-bold center\"style='font-size: 1.5em;'>" + d.word + "</div>" +
+                            "Amount: <bold><italic>" + d.amount + "</bold></italic>"
                         )
                         .style( "left", (d3.event.pageX - 90) + "px" )
                         .style( "top", (d3.event.pageY - 28) + "px" );
