@@ -6,7 +6,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // set the view engine
 app.set( 'view engine', 'ejs' )
 // allow to load external resources
-app.use(express.static('public'));
+//app.use(express.static('public'));
+//var wroot = "/ucd-ecs272-p2/";
+//app.locals.docroot = wroot + "public";
+//app.locals.njslibr = wroot + "node_modules";
+app.use(express.static(__dirname + '/public/'));
 
 // set node_module route
 app.use('/lib', express.static(__dirname + '/node_modules/'));
