@@ -1,5 +1,23 @@
-const noop = () => {};
+/* the configuration example:
+    var th_config = {
+        totalCount: total, totalCountLabel: "total", usedCount : 0, usedCountLabel:"used", usedPercentageLabel: "",
+        levels: [
+            {threshold: 0, colour: "#d9d9d9"}, // base level
+            {threshold: 20, colour: "#ffddee"},
+            {threshold: 40, colour: "#ffddcc"},
+            {threshold: 60, colour: "#94d095"}
+        ],
+        value: [
+            { label: "Positive", val: 19},
+            { label: "Negative", val: 80},
+            { label: "Neutral", val: 39},
+            { label: "Mixed", val: 55}
+        ],
+    };
+ *  to draw: thermo_draw( id, th_config );
+ */
 
+const noop = () => {};
 class D3Component
 {
     constructor({tagName, className})
@@ -206,13 +224,13 @@ class ThermoWidget extends D3Component
         thermo.mountIn(leftPanel, [this.getThermometerData(d)]);
         leftPanel.append('div').attr('class', 'percent-summary')
             .html(`<div class="count">${parseFloat(d.usedPercentage).toFixed( 1 )}%</div><div class="label">${d.usedPercentageLabel}</div>`);
-        var rightPanel = select(node).append('div').attr('class', 'panel right');
-        bullet1.mountIn(rightPanel, [{color: "#f3f3f3", count: d.totalCount, label: d.totalCountLabel}]);
-        bullet2.mountIn(rightPanel, [{color: d.usedColor, count: d.usedCount, label:d.usedCountLabel}]);
+        // var rightPanel = select(node).append('div').attr('class', 'panel right');
+        // bullet1.mountIn(rightPanel, [{color: "#f3f3f3", count: d.totalCount, label: d.totalCountLabel}]);
+        // bullet2.mountIn(rightPanel, [{color: d.usedColor, count: d.usedCount, label:d.usedCountLabel}]);
     }
 }
 
-const thermo_draw = function( config )
+const thermo_draw = function( id, config )
 {
     // set the label and value
     var d = config.value.map((d) => {
@@ -220,7 +238,7 @@ const thermo_draw = function( config )
     });
 
     const div = document.createElement('div');
-    document.getElementById('gauge-container').appendChild(div);
+    document.getElementById( id ).appendChild(div);
 
     const wgt  = new ThermoWidget({tagName:'div', className: 'thermo-widget'});
     wgt.mountIn(d3.select(div), d);
