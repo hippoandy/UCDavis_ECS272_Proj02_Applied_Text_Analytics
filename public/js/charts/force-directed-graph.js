@@ -64,21 +64,19 @@ var fd_graph = {
                 // clear old value
                 var selector = document.getElementById( "ud-r-selector-container" );
                 selector.innerHTML = "";
-                document.getElementById( "ud-uid" ).innerHTML = "";
-                var uidstyle;
+                var ud_title = document.getElementById( "ud-uid" );
+                // ud_title.innerHTML = "";
+                ud_title.style.background = "#3CA55C";
                 switch( d.group )
                 {
                     case 1:
-                        uidstyle = "User ID: <italic><positive>" + d.id + "</italic></positive>";
+                        ud_title.style.background = "#178BCA";
                         break;
                     case 2:
-                        uidstyle = "User ID: <italic><negative>" + d.id + "</italic></negative>";
-                        break;
-                    default:
-                        uidstyle = "User ID: <italic><neutral>" + d.id + "</italic></neutral>";
+                        ud_title.style.background = "#FF7777";
                         break;
                 }
-                document.getElementById( "ud-uid" ).innerHTML = uidstyle;
+                ud_title.innerHTML = "User ID &mdash; <italic>" + d.id + "</italic>";
                 // set the selector value
                 var arr = review.split( '. ' ).join('|').split('! ').join('|').split( '|' );
                 for( var i = 0 ; i < arr.length ; i++ )
@@ -135,6 +133,7 @@ var fd_graph = {
     }
 };
 
+// Single Selection Radio List Functions ----------------------------------------
 function clear_radio()
 {
     $('input[name="radio"]').each( function()
@@ -142,12 +141,13 @@ function clear_radio()
         $(this).attr( 'checked', false );
     });
 }
-
 function set_radio_true( item )
 {
     $(item).attr( 'checked', true );
 }
+// ---------------------------------------- Single Selection Radio List Functions
 
+// the button placed on the user review analysis panel
 function parse_btn()
 {
     // clear the error message
@@ -165,21 +165,26 @@ function parse_btn()
     }).promise().done( function()
     {
         if( !is_checked )   // set the error message
-            document.getElementById( "selector-e-msg" ).innerHTML = "[<italic>Error</italic>]Please select a sentence!";
+            document.getElementById( "selector-e-msg" ).innerHTML = "<italic class='font-s-1-5em'>Please select a sentence!</italic>";
         else
         {
             // show the analytic result panel
             document.getElementById( "ud-ana-result" ).style.visibility = "visible";
-            // clear the old data
+            // clear the old data & charts
             document.getElementById( "ud-tag-container" ).innerHTML = "";
             document.getElementById( "ud-token-container" ).innerHTML = "";
+            document.getElementById( "th-container" ).innerHTML = "";
             // scroll down to see the result (function located in 'main.js')
             auto_scroll( '#ud-ana-result' );
             var toparse = String($(ele).prev().html());
             var c_r = compendium.analyse( toparse );
-            console.log( c_r );
-            var tag;
+            // add the sentiment score tag
+            document.getElementById( "ud-tag-container" ).innerHTML += " \
+                <div class='sentiment-score'>Sentiment Score: <italic><yelpred>" + parseFloat(c_r[ 0 ].profile.sentiment).toFixed( 4 ) +
+            "</yelpred></italic></div>";
+            // set the tag ("positive", "negative", "neutral", or "mixed")
             var label = c_r[ 0 ].profile.label;
+            var tag = "<div class='category bgcolor-neu'>" + label + "</div>";
             switch( label )
             {
                 case "positive":
@@ -189,9 +194,6 @@ function parse_btn()
                     tag = "<div class='category bgcolor-neg'>" + label + "</div>";
                     break;
                 case "mixed":
-                    tag = "<div class='category bgcolor-neu'>" + label + "</div>";
-                    break;
-                default:
                     tag = "<div class='category bgcolor-mix'>" + label + "</div>";
                     break;
             }
@@ -204,6 +206,14 @@ function parse_btn()
                     <hr style='border-top: black 1px dotted;'/> \
                     <div class='token-tag'>" + tokens[ i ].pos + "</div> \
                 </div>";
+            // draw the thermometer
+            th_config.value = [
+                { label: "PoS Confidence", val: (c_r[ 0 ].stats.confidence * 100)},
+                { label: "Amplitude", val: (c_r[ 0 ].profile.amplitude * 100)},
+                { label: "Politeness", val: (c_r[ 0 ].profile.politeness * 100)},
+                { label: "Dirtiness", val: (c_r[ 0 ].profile.dirtiness * 100)}
+            ];
+            thermo_draw( "th-container", th_config );
         }
     });
 }
