@@ -16,6 +16,18 @@ var nlp_config = {
     ]
 };
 // for Compendium lib.
+// default configuration for the thermometer
+var th_config = {
+    totalCount: 100, totalCountLabel: "", usedCount : 0, usedCountLabel:"", usedPercentageLabel: "",
+    levels: [
+        {threshold: -100, colour: "#3f3f3f"}, // base level
+        {threshold: 0, colour: "#3f3f3f"}, // base level
+        {threshold: 20, colour: "#64B9E7"},
+        {threshold: 40, colour: "#94d095"},
+        {threshold: 60, colour: "#ffddcc"},
+        {threshold: 80, colour: "#ffddee"}
+    ]
+};
 // part-of-speech tags definition
 var post_def = {
     "CC": { "meaning": "Coord Conjuncn", "ex": "and | but | or" },
@@ -54,10 +66,7 @@ var post_def = {
     "WP": { "meaning": "Wh pronoun", "ex": "who | what" },
     "WP\$": { "meaning": "Possessive-Wh", "ex": "whose" },
     "WRB": { "meaning": "Wh-adverb", "ex": "how | where" }
-}
-
-
-
+};
 
 // example for MongoDB query function call:
 /*
