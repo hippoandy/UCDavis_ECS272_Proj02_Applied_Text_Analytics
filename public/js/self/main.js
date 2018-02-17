@@ -1,20 +1,17 @@
 var center_lat = 37.7749;
 var center_lon = -122.4194;
+var sidebar_loc = "-550px";
+var ud_offset = 50;
 
 $( document ).ready(function()
 {
     // show the first tab
-    document.getElementById( "view1" ).style.display = "block";
+    // document.getElementById( "view1" ).style.display = "block";
     // hide the sidebar
-    document.getElementById( "mySidenav" ).style.right = "-550px";
+    close_sider();
+    // hide the user review dashboard
+    close_u_dash();
 
-    // mdb_query( "business", { "business_id": "FYWN1wneV18bWNgQjJ2GNg" }, { "business_id": 1 } ).then( function( data )
-    // {   // Run this when your request was successful
-    //     console.log( data )
-    // }).catch( function( err )
-    // {   // Run this when promise was rejected via reject()
-    //     console.log( err )
-    // });
     // mdb_query( "business", {}, { "business_id": 1 } ).then( function( data )
     // {   // Run this when your request was successful
     //     console.log( data )
@@ -105,6 +102,7 @@ function init()
                     document.getElementById( "fillgauge2" ).innerHTML = "";
                     document.getElementById( "fillgauge3" ).innerHTML = "";
                     document.getElementById( "fillgauge4" ).innerHTML = "";
+                    document.getElementById( "fd-graph" ).innerHTML = "";
                     // clear old data
                     document.getElementById( "sider-cate-container" ).innerHTML = "";
                     document.getElementById( "sider-photos" ).style.background = "";
@@ -150,21 +148,41 @@ function init()
                     const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
                     document.getElementById( "stars-show" ).style.width = starPercentageRounded;
 
+                    var store_name = this.data.name;
                     // apply NLP analysis
                     // var all_adjs = new Set();
                     var all_adjs = {};
                     $.ajax({
                         type: 'POST',
-                        data: JSON.stringify( { "collection": "review", "conidtion": { "business_id": this.id }, "index": { "business_id": 1 } } ),
+                        // data: JSON.stringify( { "collection": "review", "conidtion": { "business_id": this.id }, "index": { "business_id": 1 } } ),
+                        data: JSON.stringify( { "collection": "business_reviews", "conidtion": { "business_id": this.id }, "index": { "business_id": 1 } } ),
                         contentType: 'application/json',
                         url: '/mongo/query',
                         async: true,
                         success: function( data )
                         {
-                            var nega = 0, neut = 0, pos = 0, mixed = 0, total = 0;
-                            for( var i = 0 ; i < data.length ; i++ )
+                            var arr = data[ 0 ].reviews;
+                            var nega = 0, neut = 0, pos = 0, mixed = 0, total = 0 , sentiment = 0;
+
+                            // for the graph
+                            var user_cluster = {
+                                "nodes": [
+                                    {"id": store_name, "group": 0},
+                                    {"id": "Positive", "group": 1},
+                                    {"id": "Negative", "group": 2},
+                                    {"id": "Neutral", "group": 3},
+                                ],
+                                "links": [
+                                    {"source": "Positive", "target": store_name, "value": 1},
+                                    {"source": "Negative", "target": store_name, "value": 1},
+                                    {"source": "Neutral", "target": store_name, "value": 1},
+                                ]
+                            };
+
+                            for( var i = 0 ; i < arr.length ; i++ )
                             {
-                                var toparse = String(data[ i ].text).replace( '\n', '' );
+                                var toparse = String(arr[ i ].text).replace( '\n', '' );
+                                var uid = String(arr[ i ].user_id);
                                 try
                                 {
                                     // sentiment analysis by compedium lib.
@@ -187,11 +205,12 @@ function init()
                                                 mixed += 1;
                                                 break;
                                         }
+                                        sentiment = sentiment + parseInt(c_r[ j ].profile.sentiment);
                                     }
                                 }
                                 catch( err ){}
                                 // part-of-speech tagging by compromise lib.
-                                var r = nlp( data[ i ].text );
+                                var r = nlp( toparse );
                                 //grab the adjectives
                                 var adjs = r.match( '#Adjective' ).not( nlp_config.adj_blacklist ).out('array');
                                 for( var j = 0 ; j < adjs.length ; j++ )
@@ -199,7 +218,33 @@ function init()
                                     if( all_adjs[ adjs[ j ] ] == undefined ) all_adjs[ adjs[ j ] ] = 1;
                                     else all_adjs[ adjs[ j ] ] = all_adjs[ adjs[ j ] ] + 1
                                 }
+                                var new_gnode = {"id": uid, "group": 0, "text": toparse};
+                                // clustering the user
+                                if( pos > nega )        // Positive
+                                {   new_gnode.group = 1;
+                                    // add link
+                                    user_cluster.links.push(
+                                        {"source": "Positive", "target": uid, "value": (sentiment / c_r.length) * 100 }
+                                    );
+                                }
+                                else if( nega > pos )   // Negative
+                                {   new_gnode.group = 2;
+                                    // add link
+                                    user_cluster.links.push(
+                                        {"source": "Negative", "target": uid, "value": (sentiment / c_r.length) * 100 }
+                                    );
+                                }
+                                else                    // Neutral
+                                {   new_gnode.group = 3;
+                                    // add link
+                                    user_cluster.links.push(
+                                        {"source": "Neutral", "target": uid, "value": (sentiment / c_r.length) * 100 }
+                                    );
+                                }
+                                // add node
+                                user_cluster.nodes.push( new_gnode );
                             }
+                            fd_graph.draw( user_cluster );
                             var ws = new Array();
                             for( var k in all_adjs )
                                 if( all_adjs.hasOwnProperty( k ) )
@@ -307,15 +352,35 @@ function del_markers()
 }
 // ------------------------------------------------------------------ Google Maps
 
+
+// User Review Dashboard Functions ----------------------------------------------
+async function open_u_dash()
+{
+    var e = document.getElementById( "dashboard-u-reviews" );
+    e.style.top = "10px";
+    e.style.left = String(($(window).width() / 2) - ($('#dashboard-u-reviews').width() / 2)) + "px";
+    e.style.visibility = "visible";
+}
+function close_u_dash()
+{
+    var e = document.getElementById( "dashboard-u-reviews" );
+    e.style.top = "-" + String($('#dashboard-u-reviews').height() + ud_offset) + "px";
+    e.style.visibility = "hidden";
+}
+// ---------------------------------------------- User Review Dashboard Functions
+
 // Sidebar Functions ------------------------------------------------------------
 async function open_sider()
 {
-    document.getElementById( "mySidenav" ).style.right = "0px";
+    var e = document.getElementById( "mySidenav" );
+    e.style.right = "0px";
+    e.style.visibility = "visible";
 }
-
 function close_sider()
 {
-    document.getElementById( "mySidenav" ).style.right = "-550px";
+    var e = document.getElementById( "mySidenav" );
+    e.style.right = sidebar_loc;
+    e.style.visibility = "hidden";
 }
 // ------------------------------------------------------------ Sidebar Functions
 
