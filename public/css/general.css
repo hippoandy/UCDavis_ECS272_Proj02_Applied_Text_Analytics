@@ -1,0 +1,179 @@
+@font-face {
+    font-family: Dosis;
+    src: url(/fonts/Dosis-Regular.ttf);
+}
+@font-face {
+    font-family: FjallaOne;
+    src: url(/fonts/FjallaOne-Regular.ttf);
+}
+html, body, #map {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+#footer {
+    text-align: center;
+    /* border: red 2px solid; */
+}
+
+/* general usage ------------------------------------------ */
+.title {
+    color: #3f3e3e;
+    border-bottom: #3f3e3e 0.5px solid;
+}
+.heading {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 5px;
+    text-align: left;
+}
+.text-bold {
+    font-weight: bold;
+}
+.text-gray {
+    color: #3f3e3e;
+}
+.text-white {
+    color: #fff;
+}
+.text-black {
+    color: #000;
+}
+.text-medium {
+    font-size: 1.2em;
+}
+.font-s-1-3em {
+    font-size: 1.3em;
+}
+.font-s-1-5em {
+    font-size: 1.5em;
+}
+.center {
+    text-align: center;
+}
+.float-left {
+    float: left;
+}
+.padding-2per {
+    padding: 2%;
+}
+.padding-5per {
+    padding: 5%;
+}
+.padding-10p {
+    padding: 10px;
+}
+.padding-20p {
+    padding: 20px;
+}
+.margin-b-5p {
+    margin-bottom: 5px;
+}
+.margin-b-10p {
+    margin-bottom: 10px;
+}
+.margin-20p {
+    margin: 20px;
+}
+.bgcolor-black-o8 {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.bgcolor-grass {
+    background-color: rgba(0, 152, 57, 0.9);
+}
+.bgcolor-grass-dark {
+    background-color: rgba(0, 102, 38, 0.9);
+}
+.bgcolor-pos {
+    background-color: #178BCA !important;
+}
+.bgcolor-neg {
+    background-color: #FF7777 !important;
+}
+.bgcolor-neu {
+    background-color: #3CA55C !important;
+}
+.bgcolor-mix {
+    background-color: #A24BC3 !important;
+}
+
+.button {
+    background-color: rgba(211, 35, 35, 0.8);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.button:hover {
+    transition: 0.5s;
+    background-color: #111;
+}
+/* ------------------------------------------ general usage */
+
+/* self-defined element ----------------------------------- */
+highlight {
+    color: rgb(173, 69, 38);
+}
+h4 {
+    font-size: 1.2em;
+    /* padding: 5px; */
+    color: white;
+}
+bold {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+italic {
+    font-style: italic;
+}
+large {
+    font-weight: bold;
+    font-size: 2em;
+}
+small {
+    font-size: 0.9em;
+}
+remind {
+    color: #f8ce0b;
+}
+yelpred {
+    color: #d32323;
+}
+red {
+    color: red;
+}
+green {
+    color: green;
+}
+blue {
+    color: blue;
+}
+yellow {
+    color: yellow;
+}
+
+positive, negative, neutral, mixed {
+    font-family: Helvetica; font-weight: bold;
+    font-size: 1.5em;
+}
+positive {
+    color: #178BCA;
+}
+negative {
+    color: #FF7777;
+}
+neutral {
+    color: #3CA55C;
+}
+mixed {
+    color: #A24BC3;
+}
+/* ----------------------------------- self-defined element */
