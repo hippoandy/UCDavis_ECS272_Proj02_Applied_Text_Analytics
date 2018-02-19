@@ -13,7 +13,7 @@ db = MySQLdb.connect( MySQL_ADDR, MySQL_USER, MySQL_PASS, MySQL_DB )
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
 
-command = "SELECT * FROM business WHERE stars > '%d'" % (3)
+command = "SELECT * FROM business WHERE stars >= '%d'" % (4)
 # execute SQL query using execute() method.
 cursor.execute( command )
 try:
