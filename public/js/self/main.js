@@ -53,6 +53,13 @@ function init()
         zoom: 10,
         center: poistion
     });
+    map.addListener( 'click', function()
+    {
+        // make sure the tooltips of word cloud is hidden
+        document.getElementById( 'tooltip' ).style.visibility = "hidden";
+        // close the sidebar
+        close_sider();
+    });
     google.maps.event.addListener( map, 'idle', function()
     {
         del_markers();
@@ -70,9 +77,9 @@ function init()
             for( var i = 0 ; i < data.length ; i++ )
             {
                 var d = data[ i ];
-
                 var latlon = new google.maps.LatLng( parseFloat(d.latitude), parseFloat(d.longitude) );
-                var marker = new google.maps.Marker({
+                var marker = new google.maps.Marker(
+                {
                     position: latlon,
                     map: map,
                     id: d.id,
@@ -81,20 +88,11 @@ function init()
                 markers.push( marker );
                 marker.addListener('click', function()
                 {
-                    // show the loading icon
+                    clear_sider();
+                    // show the loading animation
                     document.getElementById( "loading" ).style.visibility = "visible";
-                    // clear old chart
-                    document.getElementById( "sider-wc-container" ).innerHTML = "";
-                    document.getElementById( "fillgauge1" ).innerHTML = "";
-                    document.getElementById( "fillgauge2" ).innerHTML = "";
-                    document.getElementById( "fillgauge3" ).innerHTML = "";
-                    document.getElementById( "fillgauge4" ).innerHTML = "";
-                    document.getElementById( "fd-graph" ).innerHTML = "";
-                    // clear old data
-                    document.getElementById( "sider-cate-container" ).innerHTML = "";
-                    document.getElementById( "sider-photos" ).style.background = "";
 
-                    $.ajax({
+                    $.ajax({    // query business infromation
                         type: 'POST',
                         data: JSON.stringify( { "collection": "business", "conidtion": { "business_id": this.id } } ),
                         contentType: 'application/json',
@@ -109,8 +107,7 @@ function init()
                         },
                         error: function( err ) { console.log( err ); }
                     });
-
-                    $.ajax({
+                    $.ajax({    // query business photo
                         type: 'POST',
                         data: JSON.stringify( { "collection": "photos", "conidtion": { "business_id": this.id } } ),
                         contentType: 'application/json',
@@ -120,7 +117,7 @@ function init()
                         {
                             if( data.photo_id != undefined )
                                 document.getElementById( "sider-photos" ).style.background = "url('/img/photos/" + data.photo_id + ".jpg') no-repeat center";
-                            else
+                            else    // if no photo available, set the default picture
                                 document.getElementById( "sider-photos" ).style.background = "url('/img/photo-default.jpg') no-repeat center";
                         },
                         error: function( err ) { console.log( err ); }
@@ -135,13 +132,12 @@ function init()
                     const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
                     document.getElementById( "stars-show" ).style.width = starPercentageRounded;
 
-                    var store_name = this.data.name;
                     // apply NLP analysis
                     // var all_adjs = new Set();
+                    var store_name = this.data.name;
                     var all_adjs = {};
-                    $.ajax({
+                    $.ajax({    // query all the reviews of a specific business
                         type: 'POST',
-                        // data: JSON.stringify( { "collection": "review", "conidtion": { "business_id": this.id }, "index": { "business_id": 1 } } ),
                         data: JSON.stringify( { "collection": "business_reviews", "conidtion": { "business_id": this.id }, "index": { "business_id": 1 } } ),
                         contentType: 'application/json',
                         url: '/mongo/query',
@@ -177,23 +173,19 @@ function init()
                                         switch( l )
                                         {
                                             case "positive":
-                                                pos += 1;
-                                                break;
+                                                pos += 1; break;
                                             case "negative":
-                                                nega += 1;
-                                                break;
+                                                nega += 1; break;
                                             case "neutral":
-                                                neut += 1;
-                                                break;
+                                                neut += 1; break;
                                             case "mixed":
-                                                mixed += 1;
-                                                break;
+                                                mixed += 1; break;
                                         }
                                         sentiment = sentiment + parseInt(c_r[ j ].profile.sentiment);
                                     }
                                 }
                                 catch( err ){}
-                                // part-of-speech tagging by compromise lib.
+                                // part-of-speech tagging by Compromise lib.
                                 var r = nlp( toparse );
                                 //grab the adjectives
                                 var adjs = r.match( '#Adjective' ).not( nlp_config.adj_blacklist ).out('array');
@@ -228,11 +220,14 @@ function init()
                                 // add node
                                 user_cluster.nodes.push( new_gnode );
                             }
+                            // draw the force-directed graph
                             fd_graph.draw( user_cluster );
+
                             var ws = new Array();
                             for( var k in all_adjs )
                                 if( all_adjs.hasOwnProperty( k ) )
                                     ws.push( { "word": String( k ), "amount": parseInt( all_adjs[ k ]) } );
+                            // draw the word cloud chart
                             word_cloud.draw( ws );
 
                             total = pos + nega + neut + mixed;
@@ -245,69 +240,26 @@ function init()
                             catch( err ){ p_neut = 0; }
                             try { p_mixed = ((mixed / total) * 100).toFixed( 1 ); }
                             catch( err ){ p_mixed = 0; }
-                            // thermo_draw( gg_config );
-                            d3.select("#fillgauge1").call( d3.liquidfillgauge, p_pos, {
-                                backgroundColor: "white",
-                                waveAnimateTime: 2000,
-                                waveHeight: 0.3,
-                                waveCount: 1,
-                                valueCountUpAtStart: false,
-                                waveRiseAtStart: false
-                            }).async;
-                            d3.select("#fillgauge2").call( d3.liquidfillgauge, p_nega, {
-                                circleColor: "#FF7777",
-                                textColor: "#FF4444",
-                                waveTextColor: "#FFAAAA",
-                                waveColor: "#FF7777",
-                                backgroundColor: "white",
-                                waveAnimateTime: 2000,
-                                waveHeight: 0.3,
-                                waveCount: 1,
-                                valueCountUpAtStart: false,
-                                waveRiseAtStart: false
-                            }).async;
-                            d3.select("#fillgauge3").call( d3.liquidfillgauge, p_neut, {
-                                circleColor: "#3CA55C",
-                                textColor: "#3C7229",
-                                waveTextColor: "#3CD88F",
-                                waveColor: "#3CA55C",
-                                backgroundColor: "white",
-                                waveAnimateTime: 2000,
-                                waveHeight: 0.3,
-                                waveCount: 1,
-                                valueCountUpAtStart: false,
-                                waveRiseAtStart: false
-                            }).async;
-                            d3.select("#fillgauge4").call( d3.liquidfillgauge, p_mixed, {
-                                circleThickness: 0.4,
-                                circleColor: "#6DA398",
-                                textColor: "#0E5144",
-                                waveTextColor: "#6DA398",
-                                waveColor: "#246D5F",
-                                textVertPosition: 0.52,
-                                waveAnimateTime: 5000,
-                                waveHeight: 0,
-                                waveAnimate: false,
-                                waveCount: 2,
-                                waveOffset: 0.25,
-                                textSize: 1.2,
-                                // minValue: 30,
-                                // maxValue: 150,
-                                // displayPercent: false
-                            }).async;
+
+                            // draw the gauge
+                            d3.select("#fillgauge1").call( d3.liquidfillgauge, p_pos, pos_gauge ).async;
+                            d3.select("#fillgauge2").call( d3.liquidfillgauge, p_nega, neg_gauge).async;
+                            d3.select("#fillgauge3").call( d3.liquidfillgauge, p_neut, neu_gauge).async;
+                            d3.select("#fillgauge4").call( d3.liquidfillgauge, p_mixed, mix_gauge).async;
+
                             // check if needed to open the sidebar
                             var sider_w = document.getElementById( "mySidenav" ).style.width;
                             if( sider_w == "0px" || sider_w == "" ) setTimeout( open_sider, 1000 );
+                            
+                            // hide the loading animation
                             document.getElementById( "loading" ).style.visibility = "hidden";
                         },
                         error: function( err ) { console.log( err ); }
                     });
                 });
             }
-        }).catch( function( err )
-        {   // Run this when promise was rejected via reject()
-            console.log( err )
-        });
+        }).catch( function( err ) // Run this when promise was rejected via reject()
+        { console.log( err ) });
     });
 }
 // Sets the map on all markers in the array.
@@ -356,6 +308,19 @@ function close_u_dash()
 // ---------------------------------------------- User Review Dashboard Functions
 
 // Sidebar Functions ------------------------------------------------------------
+function clear_sider()
+{
+    // clear old chart
+    document.getElementById( "sider-wc-container" ).innerHTML = "";
+    document.getElementById( "fillgauge1" ).innerHTML = "";
+    document.getElementById( "fillgauge2" ).innerHTML = "";
+    document.getElementById( "fillgauge3" ).innerHTML = "";
+    document.getElementById( "fillgauge4" ).innerHTML = "";
+    document.getElementById( "fd-graph" ).innerHTML = "";
+    // clear old data
+    document.getElementById( "sider-cate-container" ).innerHTML = "";
+    document.getElementById( "sider-photos" ).style.background = "";
+}
 async function open_sider()
 {
     var e = document.getElementById( "mySidenav" );
