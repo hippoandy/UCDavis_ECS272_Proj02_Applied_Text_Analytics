@@ -10,7 +10,7 @@ var word_cloud = {
         // // var categories = d3.keys(d3.nest().key(function(d) { return d.category; }).map(data));
         // // var color = d3.scale.ordinal().range(["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"]);
         var color = d3.scaleBand().rangeRound( ["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"] )
-        var fontSize = d3.scalePow().domain([0,1]).range([10,30]);
+        var fontSize = d3.scalePow().domain( [ 0, 1 ]).range( [5, 15] );
 
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
             width = 460 - margin.left - margin.right,
