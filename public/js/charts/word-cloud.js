@@ -1,6 +1,8 @@
 
 // Word Cloud
-// Ref. https://bl.ocks.org/abrahamdu/e1481e86dd4e9d553cc2d7d359b91e68
+// Ref.
+//    1. https://bl.ocks.org/abrahamdu/e1481e86dd4e9d553cc2d7d359b91e68
+//    2. https://github.com/jasondavies/d3-cloud
 
 var word_cloud = {
     draw: function( data )
