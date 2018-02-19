@@ -10,7 +10,7 @@ var word_cloud = {
         // // var categories = d3.keys(d3.nest().key(function(d) { return d.category; }).map(data));
         // // var color = d3.scale.ordinal().range(["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"]);
         var color = d3.scaleBand().rangeRound( ["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854"] )
-        var fontSize = d3.scalePow().exponent(5).domain([0,1]).range([10,80]);
+        var fontSize = d3.scalePow().domain([0,1]).range([10,30]);
 
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
             width = 460 - margin.left - margin.right,
@@ -50,14 +50,9 @@ var word_cloud = {
                 .data( words )
                 .enter().append( "text" )
                 .attr( 'class', 'word')
-                .style( "font-size", function(d) { return d.size + "px"; } )
-                .style( "font-family", function(d) { return d.font; } )
-                // .style( "fill", function( d ) { return color( d ); } )
+                .style( "font-size", function(d) { return fontSize( d.amount ) + "px"; } )
+                .style( "font-family", "Dosis" )
                 .style( "fill", function( d ) { return color( d.word ); } )
-                //.style("fill", function(d) { 
-                    //var paringObject = data.filter(function(obj) { return obj.Team_CN === d.text});
-                // return color(paringObject[0].category); 
-                //})
                 .attr( "text-anchor", "middle" )
                 .attr( "transform", function( d ) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; } )
                 .text( function(d) { return d.word; } )
