@@ -18,6 +18,10 @@ This project is required to have the followings be completed:
 2. to use at least 3 visualization techniques showing the data
 3. each visualization should have at least 2 levels of granularity
 
+Library used:
+1. [Compromise JS](https://github.com/spencermountain/compromise)
+2. [Compendium JS](https://github.com/Ulflander/compendium-js)
+
 The main interface of this system is a map powered by Google Maps API.
 The markers are added based on the current scope of map and the availability of the business data.
 
