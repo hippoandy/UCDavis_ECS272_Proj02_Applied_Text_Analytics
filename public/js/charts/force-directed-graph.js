@@ -59,6 +59,9 @@ var fd_graph = {
             .on("end", dragended))
             .on( "click", function( d )
             {
+                // clear the old line chart
+                clear_udash();
+
                 var review = d.text;
                 if( review == undefined ) return;
                 // clear old value
@@ -79,13 +82,37 @@ var fd_graph = {
                 ud_title.innerHTML = "User ID &mdash; <italic>" + d.id + "</italic>";
                 // set the selector value
                 var arr = review.split( '. ' ).join('|').split('! ').join('|').split( '|' );
-                for( var i = 0 ; i < arr.length ; i++ )
+                var num_of_revs = arr.length;
+                var lc_data = [];
+                var confidence = 0, amplitude = 0, politeness = 0, dirtiness = 0;
+                for( var i = 0 ; i < num_of_revs ; i++ )
                 {
                     selector.innerHTML += "<label class='ud-r-selector'><div>" + arr[ i ] +
                         "</div><input type='radio' name='radio' onclick='clear_radio(); set_radio_true( this )'> \
                         <span class='checkmark'></span> \
                     </label>";
+
+                    var c_r = compendium.analyse( arr[ i ] );
+                    lc_data.push( { "x": i, "y": c_r[ 0 ].profile.sentiment } );
+
+                    confidence += c_r[ 0 ].stats.confidence;
+                    amplitude += c_r[ 0 ].profile.amplitude;
+                    politeness += c_r[ 0 ].profile.politeness;
+                    dirtiness += c_r[ 0 ].profile.dirtiness;
                 }
+                line_chart.draw( "#ud-line-container", lc_data );
+                confidence = confidence / num_of_revs;
+                amplitude = amplitude / num_of_revs;
+                politeness = politeness / num_of_revs;
+                dirtiness = dirtiness / num_of_revs;
+                // draw the thermometer
+                th_config.value = [
+                    { label: "Avg. PoS Confidence", val: (confidence * 100)},
+                    { label: "Avg. Amplitude", val: (amplitude * 100)},
+                    { label: "Avg. Politeness", val: (politeness * 100)},
+                    { label: "Avg. Dirtiness", val: (dirtiness * 100)}
+                ];
+                thermo_draw( "upper-th-container", th_config );
                 open_u_dash();
             });
 
@@ -167,13 +194,9 @@ function parse_btn()
         if( !is_checked )   // set the error message
             document.getElementById( "selector-e-msg" ).innerHTML = "<italic class='font-s-1-5em'>Please select a sentence!</italic>";
         else
-        {
+        {   clear_udash_lower();
             // show the analytic result panel
             document.getElementById( "ud-ana-result" ).style.visibility = "visible";
-            // clear the old data & charts
-            document.getElementById( "ud-tag-container" ).innerHTML = "";
-            document.getElementById( "ud-token-container" ).innerHTML = "";
-            document.getElementById( "th-container" ).innerHTML = "";
             // scroll down to see the result (function located in 'main.js')
             auto_scroll( '#ud-ana-result' );
             var toparse = String($(ele).prev().html());
@@ -188,14 +211,11 @@ function parse_btn()
             switch( label )
             {
                 case "positive":
-                    tag = "<div class='category bgcolor-pos'>" + label + "</div>";
-                    break;
+                    tag = "<div class='category bgcolor-pos'>" + label + "</div>"; break;
                 case "negative":
-                    tag = "<div class='category bgcolor-neg'>" + label + "</div>";
-                    break;
+                    tag = "<div class='category bgcolor-neg'>" + label + "</div>"; break;
                 case "mixed":
-                    tag = "<div class='category bgcolor-mix'>" + label + "</div>";
-                    break;
+                    tag = "<div class='category bgcolor-mix'>" + label + "</div>"; break;
             }
             // add the tag
             document.getElementById( "ud-tag-container" ).innerHTML += tag;
@@ -216,4 +236,23 @@ function parse_btn()
             thermo_draw( "th-container", th_config );
         }
     });
+}
+
+function clear_udash_upper()
+{
+    // clear the old data & charts
+    document.getElementById( "ud-line-container" ).innerHTML = "";
+    document.getElementById( "upper-th-container" ).innerHTML = "";
+}
+function clear_udash_lower()
+{
+    // clear the old data & charts
+    document.getElementById( "ud-tag-container" ).innerHTML = "";
+    document.getElementById( "ud-token-container" ).innerHTML = "";
+    document.getElementById( "th-container" ).innerHTML = "";
+}
+function clear_udash()
+{
+    clear_udash_upper();
+    clear_udash_lower()
 }
