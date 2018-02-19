@@ -33,8 +33,10 @@ The functionalities of this system are:
 ### The System Overview
 ![Overview](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover.png?raw=true)
 ### The Side Panel
-![Side Panel 1](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover1.png?raw=true))
-![Side Panel 2](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover2.png?raw=true))
+![Side Panel 1](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover1.png?raw=true)
+
+![Side Panel 2](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover2.png?raw=true)
 ### The Dashboard
-![Dashboard 1](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover3.png?raw=true))
-![Dashboard 2](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover4.png?raw=true))
+![Dashboard 1](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover3.png?raw=true)
+
+![Dashboard 2](https://github.com/hippoandy/ECS272-Applied-Text-Analytics/blob/master/screenshots/cover4.png?raw=true)
