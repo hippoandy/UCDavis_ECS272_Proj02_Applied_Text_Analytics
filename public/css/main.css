@@ -56,14 +56,55 @@
 }
 /* ------------------------------------------- start rating */
 
+/* line chart style --------------------------------------- */
+/* style the lines by removing the fill and applying a stroke */
+.lc-line {
+    fill: none;
+    stroke: #d32323;
+    stroke-width: 3;
+}
+/* style the dots by assigning a fill and stroke */
+.lc-dot {
+    fill: #d32323;
+    stroke: #fff;
+}
+svg > g > g > path {
+    stroke: white;
+}
+.tick > line {
+    stroke: white;
+}
+.tick > text {
+    font-family: Dosis;
+    fill: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.lc-overlay {
+    fill: none;
+    pointer-events: all;
+}
+.lc-label {
+    fill: white;
+    font-weight: bold;
+}
+.hover-line {
+    /* stroke: #d32323; */
+    stroke: white;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
+/* --------------------------------------- line chart style */
+
 /* gauge style -------------------------------------------- */
 .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
-#th-container {
+#th-container, #upper-th-container {
     text-align: center;
 }
-#th-container > svg {
+#th-container, #upper-th-container > svg {
     display: inline-block;
     margin: 10px;
+    width: 100%;
 }
 .thermo-widget {
     display: inline-block !important;
@@ -82,6 +123,8 @@
 .thermo-widget .percent-summary {
     display: block;
     text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
 }
 .thermo-widget > .panel.right {
     display: inline-block;
@@ -213,6 +256,11 @@ div.tooltip, .tool-tip {
     background-color: blue;
     border-bottom: white 2px solid;
     padding: 20px;
+}
+#ud-line-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* The ud-r-selector */
 .ud-r-selector {
@@ -481,6 +529,7 @@ div.tooltip, .tool-tip {
     color: white;
     text-align: left;
     padding: 10px;
+    font-size: 1.3em;
 }
 .links line
 {
@@ -533,7 +582,7 @@ div.tooltip, .tool-tip {
 .loading:not(:required):after {
     content: '';
     display: block;
-    font-size: 10px;
+    font-size: 20px;
     width: 1em;
     height: 1em;
     margin-top: -0.5em;
