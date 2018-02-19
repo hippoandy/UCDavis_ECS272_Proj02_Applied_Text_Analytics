@@ -3,6 +3,7 @@
 var sidebar_loc = "-550px";
 var ud_offset = 50;
 
+// map configurations
 var map_center = {
     // ** San Francisco **
     // "lat": 37.7749,
@@ -10,6 +11,58 @@ var map_center = {
     // ** Los Angeles **
     "lat": 34.0522,
     "lon": -118.2437
+};
+
+// chart configurations
+// Word Cloud Chart
+var pos_gauge = {
+    backgroundColor: "white",
+    waveAnimateTime: 2000,
+    waveHeight: 0.3,
+    waveCount: 1,
+    valueCountUpAtStart: false,
+    waveRiseAtStart: false
+};
+var neg_gauge = {
+    circleColor: "#FF7777",
+    textColor: "#FF4444",
+    waveTextColor: "#FFAAAA",
+    waveColor: "#FF7777",
+    backgroundColor: "white",
+    waveAnimateTime: 2000,
+    waveHeight: 0.3,
+    waveCount: 1,
+    valueCountUpAtStart: false,
+    waveRiseAtStart: false
+};
+var neu_gauge = {
+    circleColor: "#3CA55C",
+    textColor: "#3C7229",
+    waveTextColor: "#3CD88F",
+    waveColor: "#3CA55C",
+    backgroundColor: "white",
+    waveAnimateTime: 2000,
+    waveHeight: 0.3,
+    waveCount: 1,
+    valueCountUpAtStart: false,
+    waveRiseAtStart: false
+};
+var mix_gauge = {
+    circleThickness: 0.4,
+    circleColor: "#6DA398",
+    textColor: "#0E5144",
+    waveTextColor: "#6DA398",
+    waveColor: "#246D5F",
+    textVertPosition: 0.52,
+    waveAnimateTime: 5000,
+    waveHeight: 0,
+    waveAnimate: false,
+    waveCount: 2,
+    waveOffset: 0.25,
+    textSize: 1.2,
+    // minValue: 30,
+    // maxValue: 150,
+    // displayPercent: false
 };
 
 // NLP variables
