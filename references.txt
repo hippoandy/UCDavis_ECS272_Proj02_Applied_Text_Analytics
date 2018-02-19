@@ -1,0 +1,129 @@
+References:
+
+## NLP Libraries:
+1. Compendium (JavaScript)
+    https://github.com/Ulflander/compendium-js
+    https://github.com/Ulflander/compendium-js/wiki/Analysis-process
+    http://ulflander.github.io/compendium-js/
+
+2. Compromise (JavaScript)
+    https://github.com/spencermountain/compromise
+    http://compromise.cool/
+
+3. Sentimood.js (JavaScript)
+    https://github.com/soops/sentimood
+    http://www.gtlambert.com/blog/sentiment-analysis-sentimoodjs
+
+
+# Sentiment Analysis
+1. [Wiki] Sentiment analysis
+    https://www.wikiwand.com/en/Sentiment_analysis
+
+
+## Data Preprocessing
+1. Yelp Dataset Documentation:
+    https://www.yelp.com/dataset/documentation/json
+
+2. Tar Errors: Ignoring unknown extended header keyword:
+    http://lifeonubuntu.com/tar-errors-ignoring-unknown-extended-header-keyword/
+
+
+## Node.js
+1. Build a Weather Website in 30 minutes with Node.js + Express + OpenWeather:
+    https://codeburst.io/build-a-weather-website-in-30-minutes-with-node-js-express-openweather-a317f904897b
+
+2. [w3cschool] Node.js MongoDB:
+    https://www.w3schools.com/nodejs/nodejs_mongodb.asp
+
+3. [stackoverflow] get data from server with node.js:
+    https://stackoverflow.com/questions/24207507/get-data-from-server-with-node-js
+
+4. [stackoverflow] Access Data Sent to NodeJS Server via Ajax Post:
+    https://stackoverflow.com/questions/18808930/access-data-sent-to-nodejs-server-via-ajax-post
+
+5. Handling POST requests with Express and Node.js:
+    https://www.gitbook.com/book/kevinchisholm/handling-post-requests-with-express-and-node-js/details
+
+6. [stackoverflow] How to include scripts located inside the node_modules folder?:
+    https://stackoverflow.com/questions/27464168/how-to-include-scripts-located-inside-the-node-modules-folder
+
+7. [stackoverflow] How to make a node.js application run permanently?
+    https://stackoverflow.com/questions/12701259/how-to-make-a-node-js-application-run-permanently
+
+## Google Maps API
+1. [stackoverflow] Google Map API V3: How to add Custom data to markers
+    https://stackoverflow.com/questions/11378450/google-map-api-v3-how-to-add-custom-data-to-markers
+
+
+## OpenLayers/OpenStreetMap
+1. OpenLayers Simple Example:
+    https://wiki.openstreetmap.org/wiki/OpenLayers_Simple_Example
+
+2. OpenLayers: Possible to show zoom level?:
+    https://gis.stackexchange.com/questions/62926/openlayers-possible-to-show-zoom-level
+
+3. Event Handling:
+    http://dev.openlayers.org/examples/events.html
+
+4. [stackoverflow] How to get the current viewport of the map out of OpenLayers as geometry, bounding box or wkt?:
+    https://stackoverflow.com/questions/8988453/how-to-get-the-current-viewport-of-the-map-out-of-openlayers-as-geometry-boundi
+
+5. [stackoverflow] How to convert Vector Layer coordinates into Map Latitude and Longitude in Openlayers:
+    https://stackoverflow.com/questions/2601745/how-to-convert-vector-layer-coordinates-into-map-latitude-and-longitude-in-openl/2607145#2607145
+
+6. What are the possible listeners and event types for an openlayers map (ol.Map)?:
+    https://gis.stackexchange.com/questions/252946/what-are-the-possible-listeners-and-event-types-for-an-openlayers-map-ol-map
+
+7. [stackoverflow] With OpenLayers, what is the correct way of removing a markers layer, and the popups?:
+    https://stackoverflow.com/questions/4091594/with-openlayers-what-is-the-correct-way-of-removing-a-markers-layer-and-the-po
+
+
+## HTML, CSS
+1. [stackoverflow] Changing the color of an hr element:
+    https://stackoverflow.com/questions/6382023/changing-the-color-of-an-hr-element
+
+2. CSS background-image color overlay:
+    https://css-tricks.com/forums/topic/css-background-image-color-overlay/
+
+3. [stackoverflow] CSS to lay out keys/values legend horizontally.
+    https://stackoverflow.com/questions/7878076/css-to-lay-out-keys-values-legend-horizontally
+    http://jsfiddle.net/MTB2q/
+
+4. [w3cschool] UTF-8 General Punctuation
+    https://www.w3schools.com/charsets/ref_utf_punctuation.asp
+
+5. Implementing @font-face
+    http://www.miltonbayer.com/font-face/
+
+
+## JavaScript
+1. Waiting for things the JavaScript way…:
+    http://doryzidon.com/2017/01/async-js-waiting-for-things/
+2. [stackoverflow] Is there any way to wait for AJAX response and halt execution?:
+    https://stackoverflow.com/questions/12615169/is-there-any-way-to-wait-for-ajax-response-and-halt-execution/12615282
+
+3. A Simple JavaScript Technique for Filling Star Ratings:
+    https://webdesign.tutsplus.com/tutorials/a-simple-javascript-technique-for-filling-star-ratings--cms-29450
+
+4. [stackoverflow] How do I split a string with multiple separators in javascript?
+    https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
+
+5. [stackoverflow] How to uncheck a radio button?
+    https://stackoverflow.com/questions/2117538/how-to-uncheck-a-radio-button
+
+6. [stackoverflow] Invoking a jQuery function after .each() has completed
+    https://stackoverflow.com/questions/2358205/invoking-a-jquery-function-after-each-has-completed
+
+## MongoDB
+1. [mongodb]增加mongoDB效能的技巧:
+    http://blog.xuite.net/flyingidea/blog/67641474-%5Bmongodb%5D%E5%A2%9E%E5%8A%A0mongoDB%E6%95%88%E8%83%BD%E7%9A%84%E6%8A%80%E5%B7%A7
+
+
+## Git
+1. Fix Username/Password prompting for github repos cloned via https scheme:
+    https://gist.github.com/ahoward/2885020
+
+2. [stackoverflow] Git: Cannot rebase because of uncommitted changes
+    https://stackoverflow.com/questions/21358872/git-cannot-rebase-because-of-uncommitted-changes
+
+
