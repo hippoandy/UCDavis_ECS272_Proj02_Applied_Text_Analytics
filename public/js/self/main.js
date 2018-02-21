@@ -116,8 +116,10 @@ function init()
                         success: function( data )
                         {
                             if( data.photo_id != undefined )
+							{	//console.log( data.photo_id );
                                 document.getElementById( "sider-photos" ).style.background = "url('/img/photos/" + data.photo_id + ".jpg') no-repeat center";
-                            else    // if no photo available, set the default picture
+                            }
+							else    // if no photo available, set the default picture
                                 document.getElementById( "sider-photos" ).style.background = "url('/img/photo-default.jpg') no-repeat center";
                         },
                         error: function( err ) { console.log( err ); }
