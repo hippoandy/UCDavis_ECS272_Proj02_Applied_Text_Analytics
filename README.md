@@ -2,7 +2,7 @@
 This is the second course project for the Winter 2018 course - ECS272 Information Visualization at UC Davis.
 * Winter 2018
 
-### DEMO Site: [https://hipposerver.ddns.net:8901/](https://hipposerver.ddns.net:6100/)
+### DEMO Site: [https://hipposerver.ddns.net:6100/](https://hipposerver.ddns.net:6100/)
 
 ## Introduction
 
