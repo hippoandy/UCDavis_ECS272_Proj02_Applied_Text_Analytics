@@ -1,3 +1,9 @@
+var fs = require('fs');
+var https = require('https');
+var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
@@ -91,7 +97,10 @@ app.get('/', function (req, res)
 	res.render( 'index' );
 })
 
-app.listen( 8802, function ()
-{
-	console.log('App now listening on port 8802!')
-})
+//app.listen( 8802, function ()
+//{
+//	console.log('App now listening on port 8802!')
+//})
+
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen( 8802 );
