@@ -53,7 +53,7 @@ var line_chart = {
             .attr("transform", "translate(0," + height + ")")
             .call(
                 d3.axisBottom( x_scale )
-                    // .ticks( data.length )
+                    .ticks( data.length )
                     // .tickFormat( d3.format("d") )
             ); // Create an axis component with d3.axisBottom
 
